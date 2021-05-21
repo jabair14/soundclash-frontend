@@ -1,9 +1,10 @@
 import { Container, Row, Col } from "react-bootstrap";
 import  PackCard  from './PackCard';
 import {useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 
-function PackContainer () {
+function PackContainer ({ currentUser }) {
 
     const [ packs, setPacks ] = useState ([])
 
@@ -12,13 +13,15 @@ function PackContainer () {
         .then(res => res.json())
         .then(packArr => setPacks(packArr))
     }, [])
-    console.log(packs)
+    // console.log(packs)
 
     const packInfo = packs.map(pack => <PackCard key={pack.id} {...pack} />)
 
     return(
         <>
         <h2>Packs Container</h2>
+        <h3> Welcome {currentUser.name}</h3>
+       
         <Container>
             <Row md={4}>
             

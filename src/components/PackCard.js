@@ -11,6 +11,7 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
             </div>
             <div class="content">
                 <a class="header">{name}</a>
+                {/* chang a tags to link and direct to path */}
                 <div class="meta">
                     <span class="price">${price}</span>
                 </div>

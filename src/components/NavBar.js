@@ -1,23 +1,32 @@
-import { Nav } from 'react-bootstrap'
+import { Nav, Link } from 'react-bootstrap'
+import { NavLink } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
-function NavBar() {
+function NavBar({ currentUser }) {
+
+    console.log(currentUser.name)
+    
+    // useEffect
+
+    
     return (
         <>
   <Nav className="justify-content-center" >
     <Nav.Item>
-      <Nav.Link >User Profile</Nav.Link>
+      <NavLink to='/'> Logout | </NavLink>
     </Nav.Item>
-    {/* <Nav.Item>
-      <Nav.Link >Logout</Nav.Link>
-    </Nav.Item> */}
+   
     <Nav.Item>
-      <Nav.Link >Create Pack</Nav.Link>
+      <NavLink to='/createpack'> Create Pack | </NavLink>
     </Nav.Item>
-    {/* <Nav.Item>
-      <Nav.Link  >
-        Disabled
-      </Nav.Link>
-    </Nav.Item> */}
+    <Nav.Item>
+      <NavLink to="/packs"> Sounds |</NavLink>
+    </Nav.Item>
+    <Nav.Item>
+      <NavLink to={`/users/${currentUser.id}`} >
+        Profile
+      </NavLink>
+    </Nav.Item> 
   </Nav>
 
 </>

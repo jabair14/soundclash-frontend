@@ -1,21 +1,22 @@
 import { Container, Row, Col } from "react-bootstrap";
 import  PackCard  from './PackCard';
+import PackDetail from './PackDetail';
 import {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 
-function PackContainer ({ currentUser }) {
+function PackContainer ({ currentUser, packInfo }) {
 
-    const [ packs, setPacks ] = useState ([])
+    // const [ packs, setPacks ] = useState ([])
 
-    useEffect(() => {
-        fetch('http://127.0.0.1:3000/packs')
-        .then(res => res.json())
-        .then(packArr => setPacks(packArr))
-    }, [])
-    // console.log(packs)
+    // useEffect(() => {
+    //     fetch('http://127.0.0.1:3000/packs')
+    //     .then(res => res.json())
+    //     .then(packArr => setPacks(packArr))
+    // }, [])
+    // // console.log(packs)
 
-    const packInfo = packs.map(pack => <PackCard key={pack.id} {...pack} />)
+    // const packInfo = packs.map(pack => <PackCard key={pack.id} {...pack} />)
 
     return(
         <>

@@ -9,9 +9,18 @@ function UserProfile ({ currentUser }){
             <ListGroupItem>{pack.name}</ListGroupItem>
         )
     })
-    // console.log(userPacks)
+
+    const userPurchases = currentUser.purchases.map(purchase => {
+        return (purchase)
+    })
+    
+
     return(
         <>
+        {/* <div>
+
+            {userPurchases}
+        </div> */}
         {/* <h1>{ currentUser.name }</h1> */}
             <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={currentUser.image} />

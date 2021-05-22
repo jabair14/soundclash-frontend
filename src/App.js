@@ -64,7 +64,7 @@ function App() {
         <UserProfile currentUser={currentUser}/>
       </Route>
       <Route>
-        <PackDetail currentUser={currentUser}/>
+        <PackDetail currentUser={currentUser} />
       </Route>
     </Switch>
   

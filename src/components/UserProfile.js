@@ -2,7 +2,7 @@ import { Card, Img, Title, Text, Body, Link, ListGroup, ListGroupItem} from "rea
 
 function UserProfile ({ currentUser }){
 
-    // console.log(currentUser.packs)
+  
 
     const userPacks = currentUser.packs.map(pack => {
         return (
@@ -11,8 +11,22 @@ function UserProfile ({ currentUser }){
     })
 
     const userPurchases = currentUser.purchases.map(purchase => {
-        return (purchase)
+        return (purchase.pack_id)
     })
+
+    const userDownloads = currentUser.purchases.map(purchase => {
+        return (<ListGroupItem>{purchase.download}</ListGroupItem>)
+    })
+
+    console.log(userDownloads)
+
+    
+
+
+ 
+    // const userPurchases = currentUser.purchases.map(purchase => {
+    //     return (purchase)
+    // })
     
 
     return(
@@ -36,6 +50,11 @@ function UserProfile ({ currentUser }){
                     
                     {userPacks}
                 </ListGroup>
+                     <h6> Downloads: </h6>
+                 <ListGroup className="list-group-flush">
+                    {userDownloads}
+                    
+                </ListGroup> 
                 <Card.Body>
                     <Card.Link href="#">Edit Profile</Card.Link>
                     {/* <Card.Link href="#">Another Link</Card.Link> */}

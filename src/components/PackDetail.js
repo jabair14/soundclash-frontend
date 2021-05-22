@@ -1,9 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-function PackDetail ({}){
+function PackDetail (){
 
-    const [packs, setPacks] = useState(null);
+    // console.log(packInfo)
+
+    const [pack, setPack] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const params = useParams()
 
@@ -13,18 +15,18 @@ function PackDetail ({}){
         fetch(`http://127.0.0.1:3000/packs/${params.id}`)
         .then(res => res.json())
         .then(pack => {
-            setPacks(pack);
+            setPack(pack);
             setIsLoaded(true)
         });
     }, [params.id]);
 
     if (!isLoaded) return <h2> Loading... </h2>
 
-    // const { name } = packs
+    // const { name } = pack
 
 
     return (
-        <h1> detils </h1>
+        <h1> Details </h1>
     )
 }
 

@@ -1,9 +1,11 @@
 import { Col } from "react-bootstrap"
-import { Link } from 'react-router-dom'
+import { Link, useHistory, Switch, Route } from 'react-router-dom'
+import { useState } from 'react';
+import { Button, Header, Image, Modal, Checkbox, Form } from 'semantic-ui-react';
+// import PackDetail from './PackDetail';
 
 function PackCard({ id, name, price, image, preview, link, description, genre_name, author_name }) {
-
-// could i do onclick and history push to the link? Line 14
+    
     return (
     <Col >
         <div class="ui cards" margin={10}>
@@ -11,8 +13,11 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
                 <img src={image}></img>
             </div>
             <div class="content">
-                <Link to={`/packs/${id}`} class="header">{name}</Link>
+                {name}
+                {/* <Link to={`/packs/${id}`} class="header">{name}</Link> */}
                 {/* chang a tags to link and direct to path */}
+                {/* <Link to={`/packs/${id}`} class="header"> */}
+                {/* </Link> */}
                 <div class="meta">
                     <span class="price">${price}</span>
                 </div>
@@ -24,6 +29,15 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
                 </div>
                 <div class="author">
                     Producer | {author_name}
+                </div>
+                <br></br>
+                <div>
+                    {/* <button onClick={handlePurchase}>purchase</button> */}
+                <Link to={`/packs/${id}`}>
+
+                <Button>Purchase</Button>    
+                </Link>
+
                 </div>
             </div>
         </div>

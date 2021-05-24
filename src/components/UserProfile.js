@@ -1,6 +1,18 @@
 import { Card, Img, Title, Text, Body, Link, ListGroup, ListGroupItem} from "react-bootstrap"
+import { useState, useEffect } from "react";
 
-function UserProfile ({ currentUser }){
+function UserProfile ({ currentUser, handleAddDownload }){
+
+    const [purchases, setPurchases] = useState([])
+
+    // console.log(purchases)
+
+    useEffect(() => {
+        fetch(`http://127.0.0.1:3000/purchases`)
+        .then(res => res.json())
+        .then(allPurchasesArr => console.log(allPurchasesArr))
+    }, [])
+
 
   
 
@@ -10,15 +22,12 @@ function UserProfile ({ currentUser }){
         )
     })
 
-    const userPurchases = currentUser.purchases.map(purchase => {
-        return (purchase.pack_id)
-    })
 
     const userDownloads = currentUser.purchases.map(purchase => {
         return (<ListGroupItem>{purchase.download}</ListGroupItem>)
     })
 
-    console.log(userDownloads)
+    // console.log(userDownloads)
 
     
 

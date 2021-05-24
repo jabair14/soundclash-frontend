@@ -4,7 +4,42 @@ import { useState } from 'react';
 import { Button, Header, Image, Modal, Checkbox, Form } from 'semantic-ui-react';
 // import PackDetail from './PackDetail';
 
-function PackCard({ id, name, price, image, preview, link, description, genre_name, author_name }) {
+function PackCard({ id, name, price, image, preview, link, description, genre_name, author_name, currentUser, onAddPurchase }) {
+
+    const [purchaseForm, setPurchaseForm] = useState(false)
+    const [user_id, setuser_id] = useState('')
+    const [pack_id, setpack_id] = useState('')
+    const history = useHistory()
+
+    // console.log(currentUser)
+
+    const handlepurchaseform = () => {
+        setPurchaseForm(purchaseForm => !purchaseForm)
+        // console.log('clicked')
+    }
+
+    const handleSubmitPurchase = (e) => {
+        e.preventDefault()
+        // console.log('submitted')
+        const formData = {
+            user_id: currentUser.id,
+            pack_id: id,
+        }
+
+        // console.log(formData)
+        fetch('http://127.0.0.1:3000/purchases', {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(res => res.json())
+        .then(purchase => {
+            onAddPurchase(purchase)
+            history.push(`/users/${currentUser.id}`)
+        })
+    }
     
     return (
     <Col >
@@ -33,14 +68,53 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
                 <br></br>
                 <div>
                     {/* <button onClick={handlePurchase}>purchase</button> */}
-                <Link to={`/packs/${id}`}>
-
-                <Button>Purchase</Button>    
-                </Link>
+                {/* <Link to={`/packs/${id}`}> */}
+                {/* <Link> */}
+                <Button onClick={handlepurchaseform}>Purchase</Button>    
+                {/* </Link> */}
 
                 </div>
             </div>
         </div>
+            {purchaseForm ? 
+            <Form onSubmit={handleSubmitPurchase}> 
+                <div class="ui input">
+                    <label> Card Number </label>
+                    <br></br>
+                    <input type="text" 
+                    placeholder="16 digit number..."/>
+                    <br></br>
+                    <label> CVV </label>
+                    <br></br>
+                    <input type="text" 
+                    placeholder="123"/>
+                    <br></br>
+                    <label> EXP </label>
+                    <br></br>
+                    <input type="text" 
+                    placeholder="00/00"/>
+                    <br></br>
+                    <label> ZIP </label>
+                    <br></br>
+                    <input type="text" 
+                    placeholder="12345"/>
+                    <input 
+                    type="hidden"
+                    id="user_id"
+                    name="user_id"
+                    value={user_id}
+                    onChange={(event) => setuser_id(event.target.value)}
+                    />
+                    <input 
+                    type="hidden"
+                    id="pack_id"
+                    name="pack_id"
+                    value={pack_id}
+                    onChange={(event) => setpack_id(event.target.value)}
+                    />
+                    </div>
+                    <input type="submit" />
+            </Form> : null }
             
     </Col>
         

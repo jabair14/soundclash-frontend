@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import  PackCard  from './PackCard';
-import PackDetail from './PackDetail';
+// import PackDetail from './PackDetail';
 import {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 

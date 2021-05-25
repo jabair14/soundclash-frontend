@@ -1,17 +1,38 @@
-import { Card, Img, Title, Text, Body, Link, ListGroup, ListGroupItem} from "react-bootstrap"
+import { Card, Img, Title, Text, Body, Link, ListGroup, ListGroupItem, Button} from "react-bootstrap"
 import { useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom';
 
-function UserProfile ({ currentUser, handleAddDownload }){
+function UserProfile ({ currentUser, onUpdateUser}){
 
-    const [purchases, setPurchases] = useState([])
+    
+    
+    
+    const [editForm, setEditForm] = useState(false)
+    const [name, setName] = useState(currentUser.name)
+    const [email, setEmail] = useState(currentUser.email)
+    const [password, setPassword] = useState(currentUser.password)
+    const [bio, setBio] = useState(currentUser.bio)
+    const [image, setImage] = useState(currentUser.image)
+    
+    // const [editUser, setEditUser] = useState(currentUser)
+    const history = useHistory()
+    
+    
 
-    // console.log(purchases)
 
-    useEffect(() => {
-        fetch(`http://127.0.0.1:3000/purchases`)
-        .then(res => res.json())
-        .then(allPurchasesArr => console.log(allPurchasesArr))
-    }, [])
+    // useEffect(() => {
+    //     fetch(`http://127.0.0.1:3000/purchases`)
+    //     .then(res => res.json())
+    //     .then(allPurchasesArr => allPurchasesArr.filter(userPurchases => {
+    //         if (userPurchases.user_id === currentUser.id) {
+    //             // console.log(userPurchases)
+    //             setPurchases(userPurchases)
+    //         }
+    //         console.log(purchases)
+            
+    //     }))
+    // }, [])
+
 
 
   
@@ -27,15 +48,50 @@ function UserProfile ({ currentUser, handleAddDownload }){
         return (<ListGroupItem>{purchase.download}</ListGroupItem>)
     })
 
-    // console.log(userDownloads)
+    // console.log(currentPurchases)
 
-    
+    function toggleEditForm(){
+        setEditForm(!editForm)
+
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        const formData = {
+            name,
+            email,
+            bio,
+            password,
+            image
+        };
+
+        fetch(`http://127.0.0.1:3000/users/${currentUser.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+                
+            },
+            body: JSON.stringify(formData)
+
+        })
+        .then(res => res.json())
+        // console.log(formData)
+        .then(updatedUser => {
+            onUpdateUser(updatedUser)
+        })
+        history.push(`/packs`)
 
 
- 
-    // const userPurchases = currentUser.purchases.map(purchase => {
-    //     return (purchase)
-    // })
+        // const deleteUser = () => {
+        //     fetch(`http://localhost:3000/users/${currentUser}`, {
+        //       method: 'DELETE'
+        //     })
+        //     history.push('/')
+        //   }
+    }
+
     
 
     return(
@@ -62,13 +118,73 @@ function UserProfile ({ currentUser, handleAddDownload }){
                      <h6> Downloads: </h6>
                  <ListGroup className="list-group-flush">
                     {userDownloads}
+                    {/* {purchases.downloads} */}
                     
                 </ListGroup> 
                 <Card.Body>
-                    <Card.Link href="#">Edit Profile</Card.Link>
+                    <Button onClick={toggleEditForm}>Edit Profile</Button>
+                    
                     {/* <Card.Link href="#">Another Link</Card.Link> */}
+                    {/* <Button onClick={deleteUser}>Delete Profile</Button> */}
                 </Card.Body>
             </Card>
+            {editForm ? 
+            <form onSubmit={handleSubmit}>
+                <h3>Edit Profile</h3>
+                <label htmlFor="name">Name</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+            >
+            </input>
+            <br></br>
+            <label htmlFor="email">email</label>
+            <input
+                type="text"
+                id="email"
+                name="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+            >
+            </input>
+            <br></br>
+            <label htmlFor="password">password</label>
+            <input
+                type="text"
+                id="password"
+                name="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+            >
+            </input>
+            <br></br>
+            <label htmlFor="bio">bio</label>
+            <input
+                type="text"
+                id="bio"
+                name="bio"
+                value={bio}
+                onChange={(event) => setBio(event.target.value)}
+            >
+            </input>
+            <br></br>
+            <label htmlFor="image">imageURL</label>
+            <input
+                type="text"
+                id="image"
+                name="image"
+                value={image}
+                onChange={(event) => setImage(event.target.value)}
+            >
+            </input>
+            <br></br>
+            
+            <button type="submit">Update</button>
+
+            </form>: null}
         </>
     )
 }

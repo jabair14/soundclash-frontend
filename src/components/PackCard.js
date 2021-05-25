@@ -1,17 +1,26 @@
 import { Col } from "react-bootstrap"
+
 import { Link, useHistory, Switch, Route } from 'react-router-dom'
 import { useState } from 'react';
 import { Button, Header, Image, Modal, Checkbox, Form } from 'semantic-ui-react';
 // import PackDetail from './PackDetail';
 
-function PackCard({ id, name, price, image, preview, link, description, genre_name, author_name, currentUser, onAddPurchase }) {
+function PackCard({ id, name, price, image, preview, link, description, genre_name, author_name, currentUser, onAddPurchase, searchTerm }) {
 
     const [purchaseForm, setPurchaseForm] = useState(false)
+    const [currentPurchases, setCurrentPurchases] = useState(currentUser.purchases)
+    
     const [user_id, setuser_id] = useState('')
     const [pack_id, setpack_id] = useState('')
     const history = useHistory()
 
+    
+
     // console.log(currentUser)
+    // console.log(name)
+    // const filter = () => {
+    //     return name.filter(nme => nme.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    // }
 
     const handlepurchaseform = () => {
         setPurchaseForm(purchaseForm => !purchaseForm)
@@ -20,13 +29,13 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
 
     const handleSubmitPurchase = (e) => {
         e.preventDefault()
-        // console.log('submitted')
+       
         const formData = {
             user_id: currentUser.id,
             pack_id: id,
         }
 
-        // console.log(formData)
+       
         fetch('http://127.0.0.1:3000/purchases', {
             method: 'POST', 
             headers: {
@@ -36,12 +45,18 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
         })
         .then(res => res.json())
         .then(purchase => {
-            onAddPurchase(purchase)
+            console.log(purchase)
+            // onAddPurchase(purchase)
+            currentUser.purchases.push(purchase)
+            // setCurrentPurchases(purchase)
             history.push(`/users/${currentUser.id}`)
         })
     }
+    // console.log(purchase)
     
     return (
+        <>
+       
     <Col >
         <div class="ui cards" margin={10}>
             <div class="image">
@@ -117,7 +132,7 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
             </Form> : null }
             
     </Col>
-        
+        </>
     
     )
 }

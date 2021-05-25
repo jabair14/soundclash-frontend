@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 
 function NavBar({ currentUser }) {
 
-    console.log(currentUser.name)
+    // console.log(currentUser.name)
     
     // useEffect
 

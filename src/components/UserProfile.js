@@ -8,34 +8,64 @@ function UserProfile ({ currentUser, onUpdateUser}){
     
     
     const [editForm, setEditForm] = useState(false)
+    // const [editPrice, setEditPrice] = useState(false)
+    // const [packPrice, setPackPrice] = useState('')
     const [name, setName] = useState(currentUser.name)
     const [email, setEmail] = useState(currentUser.email)
     const [password, setPassword] = useState(currentUser.password)
     const [bio, setBio] = useState(currentUser.bio)
     const [image, setImage] = useState(currentUser.image)
-    const [userCreatedPacks, setUserCreatedPacks] = useState([])
+    // const [userCreatedPacks, setUserCreatedPacks] = useState([])
+    // const [updatedPrice, setUpdatedPrice] = useState(pack.price)
     
     // const [editUser, setEditUser] = useState(currentUser)
     const history = useHistory()
 
-    useEffect(() => {
-        fetch(`http://127.0.0.1:3000/users/${currentUser.id}`)
-        .then(res => res.json())
-        .then(currentUserObj => {
-            console.log(currentUserObj.packs)
-        })
-    },[])
+    // useEffect(() => {
+    //     fetch(`http://127.0.0.1:3000/users/${currentUser.id}`)
+    //     .then(res => res.json())
+    //     .then(currentUserObj => {
+    //         console.log(currentUserObj.packs)
+    //     })
+    // },[])
+    // const toggleUpdatePriceForm = () => {
+    //     // console.log('clicked')
+    //     setEditPrice(!editPrice)
+        
+    // }
 
     
     
     
     
     
+    // const handlePriceSubmit = (e) => {
+    //     e.preventDefault()
+    //     console.log(e.target.value)
+    // }
     
     const userPacks = currentUser.packs.map(pack => {
+
         return (
-            <ListGroupItem>Name: {pack.name}| Price: ${pack.price} |ID: {pack.id} <Button> Delete Pack </Button> 
+            <ListGroupItem>Name: {pack.name}| Price: ${pack.price} |ID: {pack.id} 
+            {/* <Button> Delete Pack </Button>  */}
             <br></br>
+            {/* <Button onClick={toggleUpdatePriceForm}>Update Price</Button>
+            {editPrice ? 
+            
+                <form onSubmit={handlePriceSubmit}>
+                    <h4>Edit Price</h4>
+                    <input
+                    type="number"
+                    id="price"
+                    name="price"
+                    value={packPrice}
+                    onChange={(event) => setPackPrice(event.target.value)}
+                    >
+                    </input>
+                    <button type="Submit"> Update </button>
+                </form> : null }
+                 */}
             </ListGroupItem>
         )
     })

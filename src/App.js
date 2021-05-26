@@ -85,15 +85,14 @@ function App() {
 
 
   const updateUser = (updatedUser) => {
-    // const updatedUsersArr = users.map((user) => {
-    //   if (user.id === updatedUser.id) {
-    //     return updatedUser
-    //   } else {
-    //     return user
-    //   }
-    // })
-    // setUsers(updatedUsersArr)
+  
     setCurrentUser(updatedUser)
+  }
+
+  const updatePacks = (updatedPack) => {
+    const updatedPacksArr = packs.map((pack) => {
+      setPacks(updatedPacksArr)
+    })
   }
 
 
@@ -111,7 +110,7 @@ function App() {
     {/* <Search searchTerm={searchTerm} onSearchChange={setSearchTerm}/> */}
     <Switch >
       <Route exact path="/packs">
-        <PackContainer  currentUser={currentUser} packs={packs} />
+        <PackContainer  currentUser={currentUser} packs={packs} updatePacks={updatePacks}/>
       </Route>
       <Route  exact path="/">
         <Login handleLoginUser={handleLoginUser}/>

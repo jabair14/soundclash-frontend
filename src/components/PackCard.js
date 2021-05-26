@@ -5,14 +5,43 @@ import { useState } from 'react';
 import { Button, Header, Image, Modal, Checkbox, Form } from 'semantic-ui-react';
 // import PackDetail from './PackDetail';
 
-function PackCard({ id, name, price, image, preview, link, description, genre_name, author_name, currentUser }) {
+function PackCard({ id, name, price, image, preview, link, description, genre_name, author_name, currentUser, user, updatePacks }) {
+
+    // console.log(id)
 
     const [purchaseForm, setPurchaseForm] = useState(false)
     // const [currentPurchases, setCurrentPurchases] = useState(currentUser.purchases)
     
     const [user_id, setuser_id] = useState('')
     const [pack_id, setpack_id] = useState('')
+    const [showUpdateForm, setShowUpdateForm] = useState(false)
+    const [updatedPrice, setUpdatedPrice] = useState(price)
     const history = useHistory()
+
+
+    const togglePriceUpdateForm = () => {
+        setShowUpdateForm(!showUpdateForm)
+       
+    }
+
+    const handlePriceUpdateSubmit = (e) => {
+        e.preventDefault()
+        
+        if (user.id === currentUser.id) {
+            fetch(`http://127.0.0.1:3000/packs/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type' : 'application/json',
+                }, 
+                body: JSON.stringify({ price: updatedPrice })
+            })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            // .then(updatedPack => {
+            //     updatePacks(updatedPack)
+            // })
+        } 
+    }
 
 
     const handlepurchaseform = () => {
@@ -78,7 +107,8 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
                     {/* <button onClick={handlePurchase}>purchase</button> */}
                 {/* <Link to={`/packs/${id}`}> */}
                 {/* <Link> */}
-                <Button onClick={handlepurchaseform}>Purchase</Button>    
+                <Button onClick={handlepurchaseform}>Purchase</Button>  
+                {/* <Button onClick={togglePriceUpdateForm}>Update Price</Button>   */}
                 {/* </Link> */}
 
                 </div>
@@ -123,6 +153,20 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
                     </div>
                     <input type="submit" />
             </Form> : null }
+            {showUpdateForm ? 
+            <Form onSubmit={handlePriceUpdateSubmit}>
+                <div class="ui input">
+                    <label> NewPrice </label>
+                    <br></br>
+                    <input type="number" 
+                    id="price"
+                    name="price"
+                    value={updatedPrice}
+                    onChange={(e) => setUpdatedPrice(e.target.value)}></input>
+                    <input type="submit"/>
+                    </div> 
+            </Form> : null
+            }
             
     </Col>
         </>

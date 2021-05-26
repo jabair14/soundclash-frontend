@@ -6,7 +6,7 @@ import {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 
-function PackContainer ({ currentUser, packs }) {
+function PackContainer ({ currentUser, packs, updatePacks }) {
 
     
 
@@ -15,7 +15,9 @@ function PackContainer ({ currentUser, packs }) {
 const packInfo = packs.map(
     pack => <PackCard 
     key={pack.id} 
-    {...pack} currentUser={currentUser} 
+    {...pack} 
+    currentUser={currentUser} 
+    updatePacks={updatePacks}
    
     />)
         
@@ -26,7 +28,7 @@ const packInfo = packs.map(
         <>
         <h2>Sounds</h2>
         <h3> Welcome {currentUser.name}</h3>
-       <Search />
+       {/* <Search /> */}
         <Container>
             <Row md={4}>
             

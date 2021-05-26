@@ -5,22 +5,15 @@ import { useState } from 'react';
 import { Button, Header, Image, Modal, Checkbox, Form } from 'semantic-ui-react';
 // import PackDetail from './PackDetail';
 
-function PackCard({ id, name, price, image, preview, link, description, genre_name, author_name, currentUser, onAddPurchase, searchTerm }) {
+function PackCard({ id, name, price, image, preview, link, description, genre_name, author_name, currentUser }) {
 
     const [purchaseForm, setPurchaseForm] = useState(false)
-    const [currentPurchases, setCurrentPurchases] = useState(currentUser.purchases)
+    // const [currentPurchases, setCurrentPurchases] = useState(currentUser.purchases)
     
     const [user_id, setuser_id] = useState('')
     const [pack_id, setpack_id] = useState('')
     const history = useHistory()
 
-    
-
-    // console.log(currentUser)
-    // console.log(name)
-    // const filter = () => {
-    //     return name.filter(nme => nme.name.toLowerCase().includes(searchTerm.toLowerCase()))
-    // }
 
     const handlepurchaseform = () => {
         setPurchaseForm(purchaseForm => !purchaseForm)
@@ -60,7 +53,7 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
     <Col >
         <div class="ui cards" margin={10}>
             <div class="image">
-                <img src={image}></img>
+                <img src={image} alt={name} style={{ width: "250px", height: "250px"}}></img>
             </div>
             <div class="content">
                 {name}
@@ -77,9 +70,9 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
                 <div class="genre">
                     Genre | {genre_name}
                 </div>
-                <div class="author">
+                {/* <div class="author">
                     Producer | {author_name}
-                </div>
+                </div> */}
                 <br></br>
                 <div>
                     {/* <button onClick={handlePurchase}>purchase</button> */}

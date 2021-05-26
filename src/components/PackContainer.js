@@ -6,16 +6,19 @@ import {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 
-function PackContainer ({ currentUser, packInfo }) {
+function PackContainer ({ currentUser, packs }) {
 
-    const [ searchTerm, setSearchTerm ] = useState('')
+    
 
-//     console.log(searchTerm)
+  
 
-//     const filterBySearchTerm = () => {
-//         if (packInfo.filter(pack => pack.name.toLowerCase().includes(searchTerm.toLowerCase())))
-//             console.log(packInfo)
-//   }
+const packInfo = packs.map(
+    pack => <PackCard 
+    key={pack.id} 
+    {...pack} currentUser={currentUser} 
+   
+    />)
+        
 
 
 
@@ -23,7 +26,7 @@ function PackContainer ({ currentUser, packInfo }) {
         <>
         <h2>Sounds</h2>
         <h3> Welcome {currentUser.name}</h3>
-       <Search searchTerm={searchTerm} onSearchChange={setSearchTerm}/>
+       <Search />
         <Container>
             <Row md={4}>
             

@@ -26,16 +26,20 @@ function App() {
   
   const history = useHistory()
 
+  
   const handleAddPurchase = (newPurchase) => {
     const newPurchaseArr = [newPurchase, ...purchase];
     setPurchase(newPurchaseArr);
   }
-
   
-  // const updateDownloads = (currentUser) => {
-  //   console.log(updateDownloads)
-  // }
-
+  useEffect(() => {
+    fetch('http://127.0.0.1:3000/packs')
+    .then(res => res.json())
+    .then(setPacks)
+  }, [])
+  
+  
+  
   useEffect(()=> {
     fetch('http://127.0.0.1:3000/users')
     .then(res => res.json())
@@ -65,11 +69,6 @@ function App() {
     })
   }
   // console.log(currentUser.purchases)
-  useEffect(() => {
-    fetch('http://127.0.0.1:3000/packs')
-    .then(res => res.json())
-    .then(packArr => setPacks(packArr))
-}, [])
 
 
   // const handleAddDownload = (newDownloads) => {
@@ -98,12 +97,12 @@ function App() {
   }
 
 
-  const packInfo = packs.map(
-    pack => <PackCard 
-    key={pack.id} 
-    {...pack} currentUser={currentUser} 
-    onAddPurchase={handleAddPurchase}
-    />)
+  // const packInfo = packs.map(
+  //   pack => <PackCard 
+  //   key={pack.id} 
+  //   {...pack} currentUser={currentUser} 
+  //   onAddPurchase={handleAddPurchase}
+  //   />)
 
   return (
     <>
@@ -112,7 +111,7 @@ function App() {
     {/* <Search searchTerm={searchTerm} onSearchChange={setSearchTerm}/> */}
     <Switch >
       <Route exact path="/packs">
-        <PackContainer  currentUser={currentUser} packInfo={packInfo} />
+        <PackContainer  currentUser={currentUser} packs={packs} />
       </Route>
       <Route  exact path="/">
         <Login handleLoginUser={handleLoginUser}/>
@@ -126,7 +125,7 @@ function App() {
         />
       </Route>
       <Route exact path={`/createpack`}>
-        <CreatePack currentUser={currentUser} onAddPack={handleAddPack}/>
+        <CreatePack currentUser={currentUser} onAddPack={handleAddPack} packs={packs}/>
       </Route>
       {/* <Route >
         <EditProfile currentUser={currentUser} />

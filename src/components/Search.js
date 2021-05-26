@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-function Search({ searchTerm, onSearchChange }) {
+function Search({ setPackSearch }) {
 
-    // console.log(searchTerm)
+    
 
     return (
         <div className="searchbar">
@@ -11,8 +11,8 @@ function Search({ searchTerm, onSearchChange }) {
         type="text"
         id="search"
         placeholder="Type a name to search..."
-        value={searchTerm}
-        onChange={(e) => onSearchChange(e.target.value)}
+        // value={searchTerm}
+        // onChange={(e) => setPackSearch(e.target.value)}
       />
     </div>
     )

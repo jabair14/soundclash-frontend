@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-function CreatePack({ currentUser, onAddPack }){
+function CreatePack({ currentUser, onAddPack, packs }){
 
     const [user_id, setuser_id] = useState(currentUser.id)
     const [genre_id, setgenre_id] = useState('')
@@ -38,7 +38,9 @@ function CreatePack({ currentUser, onAddPack }){
         })
         .then(res => res.json())
         .then(newPack => {
-            onAddPack(newPack);
+            // onAddPack(newPack);
+            packs.push(newPack)
+
             history.push(`/packs`)
         })
     }

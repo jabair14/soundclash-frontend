@@ -13,36 +13,36 @@ function UserProfile ({ currentUser, onUpdateUser}){
     const [password, setPassword] = useState(currentUser.password)
     const [bio, setBio] = useState(currentUser.bio)
     const [image, setImage] = useState(currentUser.image)
+    const [userCreatedPacks, setUserCreatedPacks] = useState([])
     
     // const [editUser, setEditUser] = useState(currentUser)
     const history = useHistory()
+
+    useEffect(() => {
+        fetch(`http://127.0.0.1:3000/users/${currentUser.id}`)
+        .then(res => res.json())
+        .then(currentUserObj => {
+            console.log(currentUserObj.packs)
+        })
+    },[])
+
     
     
-
-
-    // useEffect(() => {
-    //     fetch(`http://127.0.0.1:3000/purchases`)
-    //     .then(res => res.json())
-    //     .then(allPurchasesArr => allPurchasesArr.filter(userPurchases => {
-    //         if (userPurchases.user_id === currentUser.id) {
-    //             // console.log(userPurchases)
-    //             setPurchases(userPurchases)
-    //         }
-    //         console.log(purchases)
-            
-    //     }))
-    // }, [])
-
-
-
-  
-
+    
+    
+    
+    
     const userPacks = currentUser.packs.map(pack => {
         return (
-            <ListGroupItem>{pack.name}</ListGroupItem>
+            <ListGroupItem>Name: {pack.name}| Price: ${pack.price} |ID: {pack.id} <Button> Delete Pack </Button> 
+            <br></br>
+            </ListGroupItem>
         )
     })
-
+    
+    // const handleDeletePack = () => {
+    //     console.log('clicked', pack.id)
+    // }
 
     const userDownloads = currentUser.purchases.map(purchase => {
         return (<ListGroupItem>{purchase.download}</ListGroupItem>)
@@ -84,14 +84,15 @@ function UserProfile ({ currentUser, onUpdateUser}){
         history.push(`/packs`)
 
 
-        // const deleteUser = () => {
-        //     fetch(`http://localhost:3000/users/${currentUser}`, {
-        //       method: 'DELETE'
-        //     })
-        //     history.push('/')
-        //   }
     }
-
+    // console.log(currentUser)
+    
+    const deleteUser = () => {
+        fetch(`http://localhost:3000/users/${currentUser.id}`, {
+          method: 'DELETE'
+        })
+        history.push('/')
+      }
     
 
     return(
@@ -101,6 +102,7 @@ function UserProfile ({ currentUser, onUpdateUser}){
             {userPurchases}
         </div> */}
         {/* <h1>{ currentUser.name }</h1> */}
+        {/* {currentUser.packs} */}
             <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={currentUser.image} />
                 <Card.Body >
@@ -125,7 +127,7 @@ function UserProfile ({ currentUser, onUpdateUser}){
                     <Button onClick={toggleEditForm}>Edit Profile</Button>
                     
                     {/* <Card.Link href="#">Another Link</Card.Link> */}
-                    {/* <Button onClick={deleteUser}>Delete Profile</Button> */}
+                    <Button onClick={deleteUser}>Delete Profile</Button>
                 </Card.Body>
             </Card>
             {editForm ? 

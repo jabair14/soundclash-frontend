@@ -1,11 +1,11 @@
-import { Col } from "react-bootstrap"
+import { Col, Button } from "react-bootstrap"
 
 import { Link, useHistory, Switch, Route } from 'react-router-dom'
 import { useState } from 'react';
-import { Button, Header, Image, Modal, Checkbox, Form } from 'semantic-ui-react';
+import { Header, Image, Modal, Checkbox, Form, Input} from 'semantic-ui-react';
 // import PackDetail from './PackDetail';
 
-function PackCard({ id, name, price, image, preview, link, description, genre_name, author_name, currentUser, user, updatePacks }) {
+function PackCard({ id, name, price, image, preview = "https://bandcamp.com/EmbeddedPlayer/track=2449232180/size=small/bgcol=ffffff/linkcol=0687f5/transparent=true/", link, description, genre_name, author_name, currentUser, user, updatePacks }) {
 
     // console.log(id)
 
@@ -16,6 +16,7 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
     const [pack_id, setpack_id] = useState('')
     const [showUpdateForm, setShowUpdateForm] = useState(false)
     const [updatedPrice, setUpdatedPrice] = useState(price)
+    const [showMoreInfo, setShowMoreInfo] = useState(false)
     const history = useHistory()
 
 
@@ -41,6 +42,16 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
             //     updatePacks(updatedPack)
             // })
         } 
+    }
+
+    const handleMoreInfo = () => {
+        setShowMoreInfo(showMoreInfo => !showMoreInfo)
+        // return(
+            
+        //         <div class="description">
+        //             {description}
+        //         </div> 
+        // )
     }
 
 
@@ -80,11 +91,11 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
         <>
        
     <Col >
-        <div class="ui card" margin={10}>
-            <div class="image">
-                <img src={image} alt={name} style={{ width: "250px", height: "250px"}}></img>
+        <div class="ui card" margin={8} >
+            <div class="image" >
+                <img src={image} alt={name} style={{ width: "200px", height: "250px"}} ></img>
             </div>
-            <div class="content">
+            <div class="content" >
                 {name}
                 {/* <Link to={`/packs/${id}`} class="header">{name}</Link> */}
                 {/* chang a tags to link and direct to path */}
@@ -93,12 +104,19 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
                 <div class="meta">
                     <span class="price">${price}</span>
                 </div>
-                <div class="description">
+                {/* change src to each packs individula links */}
+                <iframe style={{border: "0", width: "100%", height: "42px"}} src="https://bandcamp.com/EmbeddedPlayer/track=2449232180/size=small/bgcol=ffffff/linkcol=0687f5/transparent=true/" seamless></iframe>
+               
+                
+                {/* <div class="description">
                     {description}
-                </div>
+                </div> */}
                 <div class="genre">
                     Genre | {genre_name}
                 </div>
+                {showMoreInfo ? <div class="description">
+                    {description}
+                </div> : null}
                 {/* <div class="author">
                     Producer | {author_name}
                 </div> */}
@@ -107,21 +125,26 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
                     {/* <button onClick={handlePurchase}>purchase</button> */}
                 {/* <Link to={`/packs/${id}`}> */}
                 {/* <Link> */}
-                <Button onClick={handlepurchaseform}>Purchase</Button>  
+                <div >
+
+                <Button size="sm" variant="outline-primary" block onClick={handlepurchaseform}>Purchase</Button>  
+                {/* <br></br> */}
+                <Button size="sm" block onClick={handleMoreInfo}>More Info</Button>  
                 {/* <Button onClick={togglePriceUpdateForm}>Update Price</Button>   */}
                 {/* </Link> */}
+                </div>
 
                 </div>
             </div>
         </div>
             {purchaseForm ? 
             <Form onSubmit={handleSubmitPurchase}> 
-                <div class="ui input">
-                    <label> Card Number </label>
+                <div class="ui fluid icon input" >
+                    <label> Re-enter password </label>
                     <br></br>
-                    <input type="text" 
-                    placeholder="16 digit number..."/>
-                    <br></br>
+                    <input type="password" 
+                    placeholder="password" />
+                    {/* <br></br>
                     <label> CVV </label>
                     <br></br>
                     <input type="text" 
@@ -135,7 +158,7 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
                     <label> ZIP </label>
                     <br></br>
                     <input type="text" 
-                    placeholder="12345"/>
+                    placeholder="12345"/> */}
                     <input 
                     type="hidden"
                     id="user_id"
@@ -151,7 +174,7 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
                     onChange={(event) => setpack_id(event.target.value)}
                     />
                     </div>
-                    <input type="submit" />
+                    <Button size="sm" block type="submit"> Submit </Button>
             </Form> : null }
             {showUpdateForm ? 
             <Form onSubmit={handlePriceUpdateSubmit}>

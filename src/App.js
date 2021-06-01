@@ -10,6 +10,7 @@ import Search from './components/Search';
 import { useState, useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import CreatePack from './components/CreatePack';
+import header from './soundclashheader.jpg'
 
 
 
@@ -106,9 +107,10 @@ function App() {
   return (
     <>
     <div className="main-img div">
-      <img className="header-img" src="https://cdn-resources.ableton.com/resources/filer_thumbnails/34/f2/34f2cb3a-9d27-49e9-bcd3-42fbd1c9cd32/2_blogpost_800x400.jpg__800x400_q85_subsampling-2.jpg"></img>
+      <img className="header-img" src={header}></img>
     </div>
-    <h1>SoundClash</h1>
+    {/* <h1>SoundClash</h1> */}
+    <br></br>
     <NavBar currentUser={currentUser}/>
     {/* <Search searchTerm={searchTerm} onSearchChange={setSearchTerm}/> */}
     <Switch >

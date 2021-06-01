@@ -1,4 +1,4 @@
-import { Card, Img, Title, Text, Body, Link, ListGroup, ListGroupItem, Button} from "react-bootstrap"
+import { Card, Img, Title, Text, Body, Link, ListGroup, ListGroupItem, Button, Form, Label} from "react-bootstrap"
 import { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 
@@ -47,7 +47,8 @@ function UserProfile ({ currentUser, onUpdateUser}){
     const userPacks = currentUser.packs.map(pack => {
 
         return (
-            <ListGroupItem>Name: {pack.name}| Price: ${pack.price} |ID: {pack.id} 
+            <ListGroupItem>Name: {pack.name}| Price: ${pack.price} 
+             
             {/* <Button> Delete Pack </Button>  */}
             <br></br>
             {/* <Button onClick={toggleUpdatePriceForm}>Update Price</Button>
@@ -75,7 +76,7 @@ function UserProfile ({ currentUser, onUpdateUser}){
     // }
 
     const userDownloads = currentUser.purchases.map(purchase => {
-        return (<ListGroupItem>{purchase.download}</ListGroupItem>)
+        return (<ListGroupItem><a href={purchase.download}>{purchase.download}</a></ListGroupItem>)
     })
 
     // console.log(currentPurchases)
@@ -133,7 +134,8 @@ function UserProfile ({ currentUser, onUpdateUser}){
         </div> */}
         {/* <h1>{ currentUser.name }</h1> */}
         {/* {currentUser.packs} */}
-            <Card style={{ width: '18rem' }}>
+        <div className="profile-div">
+            <Card style={{ width: '50rem' }}>
                 <Card.Img variant="top" src={currentUser.image} />
                 <Card.Body >
                     <Card.Title>{currentUser.name}</Card.Title>
@@ -142,14 +144,16 @@ function UserProfile ({ currentUser, onUpdateUser}){
                         {currentUser.bio}
                     </Card.Text>
                 </Card.Body>
-                    <h6>Packs:</h6>
+                    <h6>My Created Packs:</h6>
                 <ListGroup className="list-group-flush">
                     
                     {userPacks}
                 </ListGroup>
-                     <h6> Downloads: </h6>
+                     <h6> My Downloads: </h6>
                  <ListGroup className="list-group-flush">
+                    
                     {userDownloads}
+                     
                     {/* {purchases.downloads} */}
                     
                 </ListGroup> 
@@ -159,11 +163,11 @@ function UserProfile ({ currentUser, onUpdateUser}){
                     {/* <Card.Link href="#">Another Link</Card.Link> */}
                     <Button onClick={deleteUser}>Delete Profile</Button>
                 </Card.Body>
-            </Card>
             {editForm ? 
             <form onSubmit={handleSubmit}>
                 <h3>Edit Profile</h3>
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">name</label>
+            <div class="ui fluid icon input">
             <input
                 type="text"
                 id="name"
@@ -172,8 +176,10 @@ function UserProfile ({ currentUser, onUpdateUser}){
                 onChange={(event) => setName(event.target.value)}
             >
             </input>
-            <br></br>
+            </div>
+            
             <label htmlFor="email">email</label>
+            <div class="ui fluid icon input">
             <input
                 type="text"
                 id="email"
@@ -182,8 +188,10 @@ function UserProfile ({ currentUser, onUpdateUser}){
                 onChange={(event) => setEmail(event.target.value)}
             >
             </input>
-            <br></br>
+            </div>
+            
             <label htmlFor="password">password</label>
+            <div class="ui fluid icon input">
             <input
                 type="text"
                 id="password"
@@ -192,18 +200,21 @@ function UserProfile ({ currentUser, onUpdateUser}){
                 onChange={(event) => setPassword(event.target.value)}
             >
             </input>
-            <br></br>
+            </div>
             <label htmlFor="bio">bio</label>
+            <div class="ui fluid icon input">
             <input
-                type="text"
+                type="textarea"
                 id="bio"
                 name="bio"
                 value={bio}
                 onChange={(event) => setBio(event.target.value)}
             >
             </input>
-            <br></br>
+            </div>
+            
             <label htmlFor="image">imageURL</label>
+            <div class="ui fluid icon input">
             <input
                 type="text"
                 id="image"
@@ -212,11 +223,14 @@ function UserProfile ({ currentUser, onUpdateUser}){
                 onChange={(event) => setImage(event.target.value)}
             >
             </input>
+            </div>
             <br></br>
             
             <button type="submit">Update</button>
 
             </form>: null}
+            </Card>
+            </div>
         </>
     )
 }

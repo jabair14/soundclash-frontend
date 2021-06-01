@@ -27,7 +27,7 @@ const packInfo = packs.map(
     return(
         <>
         {/* <h2>Sounds</h2> */}
-        <h3> Welcome {currentUser.name}</h3>
+        <h4> Welcome, {currentUser.name}</h4>
        {/* <Search /> */}
         <Container>
             <Row md={4}>

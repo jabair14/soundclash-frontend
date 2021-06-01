@@ -80,7 +80,7 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
         <>
        
     <Col >
-        <div class="ui cards" margin={10}>
+        <div class="ui card" margin={10}>
             <div class="image">
                 <img src={image} alt={name} style={{ width: "250px", height: "250px"}}></img>
             </div>

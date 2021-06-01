@@ -7,11 +7,12 @@ function Login ({ handleLoginUser }){
     const [password, setPassword] = useState('')
 
     return (
-        <div>
+        <div className="login-div">
         <form onSubmit={handleLoginUser} class="ui form">
             <h1> Login </h1>
-            <div class="field">
-                <label>Email</label>
+            {/* <div class="field"> */}
+            <div class="ui input focus">
+                {/* <label>Email</label> */}
                 <input 
                     type="text" 
                     name="email" 
@@ -20,16 +21,18 @@ function Login ({ handleLoginUser }){
                     onChange={(e) => setEmail(e.target.value)}
                 />
             </div>
-            <div class="field">
-                <label>password</label>
+            <br></br>
+            <div class="ui input focus">
+                {/* <label>password</label> */}
                 <input 
-                    type="text" 
+                    type="password" 
                     name="password" 
                     placeholder="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
+            <br></br>
                 <div class="field">
                     <div class="ui checkbox">
                         <input type="checkbox" tabindex="0" class="hidden"/>

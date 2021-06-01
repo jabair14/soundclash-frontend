@@ -26,11 +26,12 @@ const packInfo = packs.map(
 
     return(
         <>
-        <h2>Sounds</h2>
+        {/* <h2>Sounds</h2> */}
         <h3> Welcome {currentUser.name}</h3>
        {/* <Search /> */}
         <Container>
             <Row md={4}>
+                
             
             {packInfo}
             

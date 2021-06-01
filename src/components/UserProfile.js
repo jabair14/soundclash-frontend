@@ -49,7 +49,9 @@ function UserProfile ({ currentUser, onUpdateUser}){
         return (
             <ListGroupItem>Name: {pack.name}| Price: ${pack.price} 
              
-            {/* <Button> Delete Pack </Button>  */}
+            <Button style={{float: "right", margin: '5px'}} size="sm" variant="danger"> Delete Pack </Button> 
+            
+            <Button style={{float: "right", margin: '5px'}} size="sm"> Edit Pack </Button> 
             <br></br>
             {/* <Button onClick={toggleUpdatePriceForm}>Update Price</Button>
             {editPrice ? 
@@ -76,7 +78,7 @@ function UserProfile ({ currentUser, onUpdateUser}){
     // }
 
     const userDownloads = currentUser.purchases.map(purchase => {
-        return (<ListGroupItem><a href={purchase.download}>{purchase.download}</a></ListGroupItem>)
+        return (<ListGroupItem><a href={purchase.download}>{purchase.download} | {purchase.title}</a></ListGroupItem>)
     })
 
     // console.log(currentPurchases)
@@ -161,7 +163,7 @@ function UserProfile ({ currentUser, onUpdateUser}){
                     <Button onClick={toggleEditForm}>Edit Profile</Button>
                     
                     {/* <Card.Link href="#">Another Link</Card.Link> */}
-                    <Button onClick={deleteUser}>Delete Profile</Button>
+                    <Button onClick={deleteUser} style={{float: "right"}}>Delete Profile</Button>
                 </Card.Body>
             {editForm ? 
             <form onSubmit={handleSubmit}>
@@ -194,7 +196,7 @@ function UserProfile ({ currentUser, onUpdateUser}){
             <label htmlFor="password">password</label>
             <div class="ui fluid icon input">
             <input
-                type="text"
+                type="password"
                 id="password"
                 name="password"
                 value={password}

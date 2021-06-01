@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Header, Image, Modal, Checkbox, Form, Input} from 'semantic-ui-react';
 // import PackDetail from './PackDetail';
 
-function PackCard({ id, name, price, image, preview = "https://bandcamp.com/EmbeddedPlayer/track=2449232180/size=small/bgcol=ffffff/linkcol=0687f5/transparent=true/", link, description, genre_name, author_name, currentUser, user, updatePacks }) {
+function PackCard({ id, name, price, image, preview, link, description, genre_name, author_name, currentUser, user, updatePacks }) {
 
     // console.log(id)
 
@@ -91,9 +91,9 @@ function PackCard({ id, name, price, image, preview = "https://bandcamp.com/Embe
         <>
        
     <Col >
-        <div class="ui card" margin={8} >
+        <div class="ui card" border="primary" margin={10} >
             <div class="image" >
-                <img src={image} alt={name} style={{ width: "200px", height: "250px"}} ></img>
+                <img src={image} alt={name} style={{ width: "200px", height: "200px", margin: '4px 4px 4px'}} ></img>
             </div>
             <div class="content" >
                 {name}
@@ -105,7 +105,7 @@ function PackCard({ id, name, price, image, preview = "https://bandcamp.com/Embe
                     <span class="price">${price}</span>
                 </div>
                 {/* change src to each packs individula links */}
-                <iframe style={{border: "0", width: "100%", height: "42px"}} src="https://bandcamp.com/EmbeddedPlayer/track=2449232180/size=small/bgcol=ffffff/linkcol=0687f5/transparent=true/" seamless></iframe>
+                <iframe style={{border: "0", width: "100%", height: "42px"}} src={preview} seamless></iframe>
                
                 
                 {/* <div class="description">
@@ -140,10 +140,10 @@ function PackCard({ id, name, price, image, preview = "https://bandcamp.com/Embe
             {purchaseForm ? 
             <Form onSubmit={handleSubmitPurchase}> 
                 <div class="ui fluid icon input" >
-                    <label> Re-enter password </label>
+                    <label> You're about to purchase {name}, continue? </label>
                     <br></br>
-                    <input type="password" 
-                    placeholder="password" />
+                    {/* <input type="password" 
+                    placeholder="password" /> */}
                     {/* <br></br>
                     <label> CVV </label>
                     <br></br>
@@ -174,7 +174,7 @@ function PackCard({ id, name, price, image, preview = "https://bandcamp.com/Embe
                     onChange={(event) => setpack_id(event.target.value)}
                     />
                     </div>
-                    <Button size="sm" block type="submit"> Submit </Button>
+                    <Button size="sm" block type="submit"> Buy </Button>
             </Form> : null }
             {showUpdateForm ? 
             <Form onSubmit={handlePriceUpdateSubmit}>

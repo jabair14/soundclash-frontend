@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
 
 
 function Login ({ handleLoginUser }){
@@ -39,7 +40,7 @@ function Login ({ handleLoginUser }){
                         <label>I am a Human</label>
                      </div>
                 </div>
-            <button class="ui button" type="submit">Submit</button>
+            <Button class="ui button" type="submit">Submit</Button>
         </form>
         </div>
     )

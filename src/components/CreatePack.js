@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Button } from "react-bootstrap"
 
 function CreatePack({ currentUser, onAddPack, packs }){
 
@@ -46,104 +47,108 @@ function CreatePack({ currentUser, onAddPack, packs }){
     }
     return(
         <>
-        <section>
-            <form onSubmit={handlePackSubmit}>
-            <h3>Create PACK PAGE</h3>
-            {/* <label htmlFor="user_id">User ID</label> */}
-            <input
-                type="hidden"
-                id="user_id"
-                name="user_id"
-                value={user_id}
-                onChange={(event) => setuser_id(event.target.value)}
-            >
-            </input>
-            <label htmlFor="genre_id">Genre ID</label>
-            <select
-                id="genre_id"
-                name="genre_id"
-                value={genre_id}
-                onChange={(event) => setgenre_id(event.target.value)}
-            >
-                <option value="1">Hip-Hop</option>
-                <option value="2">RnB</option>
-                <option value="3">Jazz</option>
-                <option value="4">IDM</option>
-                <option value="5">Ambient</option>
-                <option value="6">Techno</option>
-                <option value="7">House</option>
-                <option value="8">Dancehall</option>
-                <option value="9">Afro-beats</option>
-                <option value="10">UK Drill/Grime</option>
-                <option value="11">Foley</option>
-                <option value="12">EDM</option>
-            </select>
-            <br></br>
-            <label htmlFor="name">Name</label>
-            <input
-                type="text"
-                id="name"
-                name="name"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-            >
-            </input>
-            <br></br>
-            <label htmlFor="description">Description</label>
-            <input
-                type="text"
-                id="description"
-                name="description"
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
-            >
-            </input>
-            <br></br>
-            <label htmlFor="image">imageURL</label>
-            <input
-                type="text"
-                id="image"
-                name="image"
-                value={image}
-                onChange={(event) => setImage(event.target.value)}
-            >
-            </input>
-            <br></br>
-            <label htmlFor="preview">previewURL</label>
-            <input
-                type="text"
-                id="preview"
-                name="preview"
-                value={preview}
-                onChange={(event) => setPreview(event.target.value)}
-            >
-            </input>
-            <br></br>
-            <label htmlFor="link">linkURL</label>
-            <input
-                type="text"
-                id="link"
-                name="link"
-                value={link}
-                onChange={(event) => setLink(event.target.value)}
-            >
-            </input>
-            <br></br>
-            <label htmlFor="price">Price</label>
-            <input
-                type="number"
-                id="price"
-                name="price"
-                value={price}
-                onChange={(event) => setPrice(event.target.value)}
-            >
-            </input>
-            <br></br>
-            <button type="submit">Add Pack</button>
+            <div className="createpack-div">
+                <section>
+                    <form onSubmit={handlePackSubmit}>
+                        <h3>Create New Pack</h3>
+                        {/* <label htmlFor="user_id">User ID</label> */}
+                        <input
+                            type="hidden"
+                            id="user_id"
+                            name="user_id"
+                            value={user_id}
+                            onChange={(event) => setuser_id(event.target.value)}
+                        >
+                        </input>
+                        <label htmlFor="genre_id">Genre ID</label>
+                        <br></br>
+                        <select
+                            id="genre_id"
+                            name="genre_id"
+                            value={genre_id}
+                            onChange={(event) => setgenre_id(event.target.value)}
+                        >
+                            <option value="1">Hip-Hop</option>
+                            <option value="2">RnB</option>
+                            <option value="3">Jazz</option>
+                            <option value="4">IDM</option>
+                            <option value="5">Ambient</option>
+                            <option value="6">Techno</option>
+                            <option value="7">House</option>
+                            <option value="8">Dancehall</option>
+                            <option value="9">Afro-beats</option>
+                            <option value="10">UK Drill/Grime</option>
+                            <option value="11">Foley</option>
+                            <option value="12">EDM</option>
+                        </select>
+                        <br></br>
+                        <label htmlFor="name">Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={name}
+                            onChange={(event) => setName(event.target.value)}
+                        >
+                        </input>
+                        <br></br>
+                        <label htmlFor="description">Description</label>
+                        <input
+                            type="text"
+                            id="description"
+                            name="description"
+                            value={description}
+                            onChange={(event) => setDescription(event.target.value)}
+                        >
+                        </input>
+                        <br></br>
+                        <label htmlFor="image">Image Link</label>
+                        <input
+                            type="text"
+                            id="image"
+                            name="image"
+                            value={image}
+                            onChange={(event) => setImage(event.target.value)}
+                        >
+                        </input>
+                        <br></br>
+                        <label htmlFor="preview">Preview Link</label>
+                        <input
+                            type="text"
+                            id="preview"
+                            name="preview"
+                            value={preview}
+                            onChange={(event) => setPreview(event.target.value)}
+                        >
+                        </input>
+                        <br></br>
+                        <label htmlFor="link">Download Link</label>
+                        <input
+                            type="text"
+                            id="link"
+                            name="link"
+                            value={link}
+                            onChange={(event) => setLink(event.target.value)}
+                        >
+                        </input>
+                        <br></br>
+                        <label htmlFor="price">Price</label>
+                        <br></br>
+                        <input
+                            type="number"
+                            id="price"
+                            name="price"
+                            value={price}
+                            onChange={(event) => setPrice(event.target.value)}
+                        >
+                        </input>
+                        <br></br>
+                        <br></br>
+                        <Button type="submit">Add Pack</Button>
+                    </form>
 
-            </form>
-
-        </section>
+                </section>
+            </div>
         </>
     )
 }

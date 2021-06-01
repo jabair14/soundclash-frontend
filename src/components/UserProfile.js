@@ -181,6 +181,7 @@ function UserProfile ({ currentUser, onUpdateUser}){
             <label htmlFor="email">email</label>
             <div class="ui fluid icon input">
             <input
+                
                 type="text"
                 id="email"
                 name="email"
@@ -204,7 +205,7 @@ function UserProfile ({ currentUser, onUpdateUser}){
             <label htmlFor="bio">bio</label>
             <div class="ui fluid icon input">
             <input
-                type="textarea"
+                type="text"
                 id="bio"
                 name="bio"
                 value={bio}
@@ -226,7 +227,7 @@ function UserProfile ({ currentUser, onUpdateUser}){
             </div>
             <br></br>
             
-            <button type="submit">Update</button>
+            <Button variant="outline-primary" type="submit" block>Update</Button>
 
             </form>: null}
             </Card>

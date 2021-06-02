@@ -93,7 +93,7 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
     <Col >
         <div class="ui card" border="primary" margin={10} >
             <div class="image" >
-                <img src={image} alt={name} style={{ width: "200px", height: "200px", margin: '4px 4px 4px'}} ></img>
+                <img src={image} alt={name} style={{ width: "100%", height: "auto"}} ></img>
             </div>
             <div class="content" >
                 {name}
@@ -105,7 +105,6 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
                     <span class="price">${price}</span>
                 </div>
                 {/* change src to each packs individula links */}
-                <iframe style={{border: "0", width: "100%", height: "42px"}} src={preview} seamless></iframe>
                
                 
                 {/* <div class="description">
@@ -116,6 +115,7 @@ function PackCard({ id, name, price, image, preview, link, description, genre_na
                 </div>
                 {showMoreInfo ? <div class="description">
                     {description}
+                    <iframe style={{border: "0", width: "100%", height: "42px"}} src={preview} seamless></iframe>
                 </div> : null}
                 {/* <div class="author">
                     Producer | {author_name}

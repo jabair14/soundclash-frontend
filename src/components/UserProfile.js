@@ -78,7 +78,7 @@ function UserProfile ({ currentUser, onUpdateUser}){
     // }
 
     const userDownloads = currentUser.purchases.map(purchase => {
-        return (<ListGroupItem><a href={purchase.download}>{purchase.download} | {purchase.title}</a></ListGroupItem>)
+        return (<ListGroupItem><a href={purchase.download} target="_blank">{purchase.download} | {purchase.title}</a></ListGroupItem>)
     })
 
     // console.log(currentPurchases)

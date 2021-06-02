@@ -107,7 +107,7 @@ function App() {
   return (
     <>
     <div className="main-img div">
-      <img className="header-img" src={header}></img>
+      <img className="header-img" src={header} style={{maxWidth: "100%", height: "200px"}}></img>
     </div>
     {/* <h1>SoundClash</h1> */}
     <br></br>

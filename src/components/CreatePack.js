@@ -41,6 +41,7 @@ function CreatePack({ currentUser, onAddPack, packs }){
         .then(newPack => {
             // onAddPack(newPack);
             packs.push(newPack)
+            
 
             history.push(`/packs`)
         })

@@ -21,30 +21,10 @@ function UserProfile ({ currentUser, onUpdateUser}){
     // const [editUser, setEditUser] = useState(currentUser)
     const history = useHistory()
 
-    // useEffect(() => {
-    //     fetch(`http://127.0.0.1:3000/users/${currentUser.id}`)
-    //     .then(res => res.json())
-    //     .then(currentUserObj => {
-    //         console.log(currentUserObj.packs)
-    //     })
-    // },[])
-    // const toggleUpdatePriceForm = () => {
-    //     // console.log('clicked')
-    //     setEditPrice(!editPrice)
-        
-    // }
-
-    
-    
-    
-    
-    
-    // const handlePriceSubmit = (e) => {
-    //     e.preventDefault()
-    //     console.log(e.target.value)
-    // }
+ 
     
     const userPacks = currentUser.packs.map(pack => {
+        
 
         return (
             <ListGroupItem>Name: {pack.name}| Price: ${pack.price} 

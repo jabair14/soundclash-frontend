@@ -68,3 +68,42 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+# SoundClash - A marketplace app for creatives. 
+
+## General Info
+
+This is a sample pack marketplace for the independent musician.
+
+## Technologies 
+
+    - React Bootstrap  v1.6.1
+    - React v17.0.2
+    - Rails 5 
+    - Ruby 2.6.1
+
+## Setup 
+
+To run this project, intall locally using npm: 
+
+    - npm intall
+    - npm start 
+
+## Features 
+
+    - Create and list Sample Packs for sale
+    - Purchase Sample Packs
+    - Purchases store download links in User Profile
+    - update profile information
+
+### To Do:
+
+    - Delete Sample Packs from database
+    - create "Sale/Promo Coupons"
+    - integrate dropbox and paypal functionality
+
+    
+
+
